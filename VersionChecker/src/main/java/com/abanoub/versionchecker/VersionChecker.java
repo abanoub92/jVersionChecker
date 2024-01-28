@@ -7,12 +7,16 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.util.Log;
 
+import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.exceptions.OnErrorNotImplementedException;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class VersionChecker {
@@ -47,11 +51,19 @@ public class VersionChecker {
     @SuppressLint("CheckResult")
     public void check(){
         Observable.fromCallable(() -> {
-            Document doc = Jsoup.connect("https://play.google.com/store/apps/details?id="+packageName).get();
-            return doc.getElementsByAttributeValue("itemprop","softwareVersion");
-        }).subscribeOn(Schedulers.io())
+            try {
+                Document doc = Jsoup.connect("https://play.google.com/store/apps/details?id="+packageName).get();
+                return doc.getElementsByAttributeValue("itemprop","softwareVersion");
+            }catch (HttpStatusException e){
+                return new Elements();
+            }
+                }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnError(throwable -> { return; })
                 .subscribe(s -> {
+                    if (s.text().isEmpty())
+                        return;
+
                     if (!s.text().equals(currentVersion))
                         if (!activity.isFinishing()) //to avoid crashing when activiy is not visible
                             showUpdate().create().show();
