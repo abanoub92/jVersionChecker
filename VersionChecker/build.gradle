@@ -48,7 +48,7 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.findByName('release')
                 groupId = 'com.github.abanoub92'
-                artifactId = 'version-checker'
+                artifactId = 'jversionchecker'
                 version = '1.0.0'
             }
         }
