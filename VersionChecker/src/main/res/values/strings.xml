@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="version_checker_title">Update available</string>
+    <string name="version_checker_ok">Update</string>
+    <string name="version_checker_desc">There is a new version available on the Google Play Store. You must update the version installed on your device</string>
+</resources>
