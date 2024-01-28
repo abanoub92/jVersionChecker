@@ -1,15 +1,11 @@
 # jVersion Checker
-***
-## Check whether the version of the android application on the user’s phone is up to date or not.
-## If the version is old, a message will be shown warning the user to update the version
-## and forcing him to update because he cannot close the message except when updating.
-## If it is up to date, no warning messages will appear to the user.
+
+#### Check whether the version of the android application on the user’s phone is up to date or not. If the version is old, a message will be shown warning the user to update the version and forcing him to update because he cannot close the message except when updating. If it is up to date, no warning messages will appear to the user.
 
 
-# Installation
-***
-### Step 1. Add the JitPack repository to your settings file (new build structure),
-### or build file (old build structure):
+## Installation
+
+#### Step 1. Add the JitPack repository to your settings file (new build structure), or build file (old build structure):
 
 ```
 dependencyResolutionManagement {
@@ -21,7 +17,7 @@ dependencyResolutionManagement {
 }
  ```
 
-### Step 2. Add the dependency
+#### Step 2. Add the dependency
 
 ```
 dependencies {
@@ -30,9 +26,9 @@ dependencies {
 ```
 
 
-# Usage
+## Usage
 
-### A sample usage of a sample and easy library
+#### A sample usage of a sample and easy library
 
 ```
 public class MainActivity extends AppCompatActivity {
@@ -49,6 +45,6 @@ public class MainActivity extends AppCompatActivity {
 ```
 
 
-# Library License
-***
-Library Licensed under the Apache License, see the [License](https://www.apache.org/licenses/LICENSE-2.0.txt)
+## Library License
+
+##### Library Licensed under the Apache License, see the [License](https://github.com/abanoub92/VersionChecker?tab=Apache-2.0-1-ov-file)
