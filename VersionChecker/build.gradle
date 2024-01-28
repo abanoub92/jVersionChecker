@@ -49,8 +49,11 @@ afterEvaluate {
                 from components.findByName('release')
                 groupId = 'com.github.abanoub92'
                 artifactId = 'jversionchecker'
-                version = '1.0.0'
+                version = '1.0.1'
             }
+        }
+        repositories {
+            mavenLocal()
         }
     }
 }
