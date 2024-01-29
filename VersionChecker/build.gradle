@@ -1,7 +1,14 @@
 plugins {
-    id 'maven-publish'
     id 'com.android.library'
+    id 'maven-publish'
 }
+
+def githubProperties = new Properties()
+def githubFile = rootProject.file("github.properties")
+if (githubFile.exists()){
+    githubProperties.load(new FileInputStream(githubFile))
+}
+
 
 android {
     namespace 'com.abanoub.versionchecker'
@@ -42,18 +49,16 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
+afterEvaluate{
+    publishing{
+        publications{
+            release(MavenPublication){
                 from components.findByName('release')
-                groupId = 'com.github.abanoub92'
-                artifactId = 'jversionchecker'
-                version = '1.0.1'
+
+                groupId='com.github.abanoub92'
+                artifactId = 'version-checker'
+                version = '1.2.0'
             }
-        }
-        repositories {
-            mavenLocal()
         }
     }
 }
