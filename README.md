@@ -21,10 +21,10 @@ dependencyResolutionManagement {
 
 ```
 dependencies {
-        implementation 'com.github.abanoub92:jVersionChecker:1.0.0'
+        implementation 'com.github.abanoub92:jVersionChecker:x.x.x'
 }
 ```
-
+[![](https://jitpack.io/v/abanoub92/jVersionChecker.svg)](https://jitpack.io/#abanoub92/jVersionChecker)
 
 ## Usage
 
