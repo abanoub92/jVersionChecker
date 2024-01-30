@@ -24,7 +24,7 @@ dependencies {
         implementation 'com.github.abanoub92:jVersionChecker:x.x.x'
 }
 ```
-[![Release](https://jitpack.io/v/jitpack/android-example.svg)](https://jitpack.io/#abanoub92/jVersionChecker)
+[![](https://jitpack.io/v/abanoub92/jVersionChecker.svg)](https://jitpack.io/#abanoub92/jVersionChecker)
 
 ## Usage
 
