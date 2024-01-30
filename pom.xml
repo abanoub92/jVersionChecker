@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.abanoub92</groupId>
     <artifactId>jVersionChecker</artifactId>
-    <version>1.5.0</version>
+    <version>1.6.0</version>
     <packaging>pom</packaging>
-    <description>Fix issues</description>
+    <description>Fix check updates issues</description>
 </project>

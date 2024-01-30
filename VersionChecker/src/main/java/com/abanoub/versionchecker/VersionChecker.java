@@ -8,21 +8,15 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 
-import org.jsoup.HttpStatusException;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 
 public class VersionChecker {
 
     @SuppressLint("StaticFieldLeak")
     private static VersionChecker instance = null;
     private final Activity activity;
-    private String currentVersion = "";
+    private int currentVersion = 0;
     private String packageName = "";
 
     private VersionChecker(Activity activity){
@@ -30,7 +24,7 @@ public class VersionChecker {
 
         try {
             PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
-            currentVersion = packageInfo.versionName;
+            currentVersion = packageInfo.versionCode;
             packageName = packageInfo.packageName;
         } catch (PackageManager.NameNotFoundException e) {
             throw new RuntimeException(e);
@@ -41,31 +35,22 @@ public class VersionChecker {
         if (instance == null)
             instance = new VersionChecker(activity);
 
-
-
         return instance;
     }
 
     @SuppressLint("CheckResult")
     public void check(){
-        Observable.fromCallable(() -> {
-            try {
-                Document doc = Jsoup.connect("https://play.google.com/store/apps/details?id="+packageName).get();
-                return doc.getElementsByAttributeValue("itemprop","softwareVersion");
-            }catch (HttpStatusException e){
-                return new Elements();
-            }
-                }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnError(throwable -> { return; })
-                .subscribe(s -> {
-                    if (s.text().isEmpty())
-                        return;
+        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(activity);
+        appUpdateManager.getAppUpdateInfo().addOnCompleteListener(task -> {
+            int s = task.getResult().availableVersionCode();
 
-                    if (!s.text().equals(currentVersion))
-                        if (!activity.isFinishing()) //to avoid crashing when activiy is not visible
-                            showUpdate().create().show();
-                });
+            if (s == 0)
+                return;
+
+            if (s > currentVersion)
+                if (!activity.isFinishing()) //to avoid crashing when activiy is not visible
+                    showUpdate().create().show();
+        });
     }
 
     private AlertDialog.Builder showUpdate(){
