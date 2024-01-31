@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         minSdk 21
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -39,6 +39,9 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
 
+    //MULTIDEX lib
+    implementation 'androidx.multidex:multidex:2.0.1'
+
     implementation 'com.google.android.play:app-update:2.1.0'
 
     testImplementation 'junit:junit:4.13.2'
@@ -52,9 +55,9 @@ publishing{
         maven(MavenPublication){
             groupId='com.github.abanoub92'
             artifactId = 'jVersionChecker'
-            version = '1.6.0'
+            version = '1.7.0'
             pom {
-                description = 'Fix check updates issues'
+                description = 'Add multidex dependency'
             }
         }
     }
