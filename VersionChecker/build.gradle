@@ -55,9 +55,9 @@ publishing{
         maven(MavenPublication){
             groupId='com.github.abanoub92'
             artifactId = 'jVersionChecker'
-            version = '1.7.0'
+            version = '1.8.0'
             pom {
-                description = 'Add multidex dependency'
+                description = 'Add dependencies to pom.xml file'
             }
         }
     }
