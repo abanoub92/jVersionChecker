@@ -22,7 +22,6 @@ dependencyResolutionManagement {
 ```
 dependencies {
         implementation 'com.github.abanoub92:jVersionChecker:x.x.x'
-        implementation 'com.google.android.play:app-update:2.1.0'
 }
 ```
 [![](https://jitpack.io/v/abanoub92/jVersionChecker.svg)](https://jitpack.io/#abanoub92/jVersionChecker)
