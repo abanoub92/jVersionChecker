@@ -55,7 +55,7 @@ publishing{
         maven(MavenPublication){
             groupId='com.github.abanoub92'
             artifactId = 'jVersionChecker'
-            version = '1.8.0'
+            version = '1.8.6'
             pom {
                 description = 'Add dependencies to pom.xml file'
             }

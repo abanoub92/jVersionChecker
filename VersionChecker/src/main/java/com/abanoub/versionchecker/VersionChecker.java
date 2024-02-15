@@ -3,6 +3,7 @@ package com.abanoub.versionchecker;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -41,8 +42,8 @@ public class VersionChecker {
     @SuppressLint("CheckResult")
     public void check(){
         AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(activity);
-        appUpdateManager.getAppUpdateInfo().addOnCompleteListener(task -> {
-            int s = task.getResult().availableVersionCode();
+        appUpdateManager.getAppUpdateInfo().addOnSuccessListener(task -> {
+            int s = task.availableVersionCode();
 
             if (s == 0)
                 return;
@@ -62,10 +63,10 @@ public class VersionChecker {
                     try {
                         activity.startActivity(
                                 new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName)));
-                    }catch (android.content.ActivityNotFoundException ignored) {
+                    }catch (ActivityNotFoundException ex) {
                         activity.startActivity(
                                 new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + packageName)));
-                        ignored.printStackTrace();
+                        ex.printStackTrace();
                     }
 
                 });
