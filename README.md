@@ -25,7 +25,8 @@ dependencies {
         implementation 'com.google.android.play:app-update:2.1.0'
 }
 ```
-[![](https://jitpack.io/v/abanoub92/jVersionChecker.svg)](https://jitpack.io/#abanoub92/jVersionChecker)
+##### Note replace 'x.x.x' with the latest version number -> [![](https://jitpack.io/v/abanoub92/jVersionChecker.svg)](https://jitpack.io/#abanoub92/jVersionChecker)
+
 
 ## Usage
 
