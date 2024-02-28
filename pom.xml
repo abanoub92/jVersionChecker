@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.abanoub92</groupId>
     <artifactId>jVersionChecker</artifactId>
-    <version>1.8.6</version>
+    <version>1.8.7</version>
     <packaging>pom</packaging>
-    <description>Fix issues</description>
+    <description>Fix test issues</description>
     <dependencies>
         <dependency>
             <groupId>com.google.android.play</groupId>

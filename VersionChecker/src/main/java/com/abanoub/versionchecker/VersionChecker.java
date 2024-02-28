@@ -12,6 +12,8 @@ import android.net.Uri;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class VersionChecker {
 
     @SuppressLint("StaticFieldLeak")
@@ -40,7 +42,8 @@ public class VersionChecker {
     }
 
     @SuppressLint("CheckResult")
-    public void check(){
+    public boolean check(){
+        AtomicBoolean updateAvailable = new AtomicBoolean(false);
         AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(activity);
         appUpdateManager.getAppUpdateInfo().addOnSuccessListener(task -> {
             int s = task.availableVersionCode();
@@ -48,10 +51,15 @@ public class VersionChecker {
             if (s == 0)
                 return;
 
-            if (s > currentVersion)
-                if (!activity.isFinishing()) //to avoid crashing when activiy is not visible
+            if (s > currentVersion) {
+                updateAvailable.set(true);
+                if (!activity.isFinishing()) //to avoid crashing when activity is not visible
                     showUpdate().create().show();
+            }
+
         });
+
+        return updateAvailable.get();
     }
 
     private AlertDialog.Builder showUpdate(){
