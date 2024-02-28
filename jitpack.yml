@@ -4,4 +4,4 @@ before_install:
   - ./scripts/prepareJitpackEnvironment.sh
 install:
   - FILE="-Dfile=VersionChecker-release.aar"
-  - mvn install:install-file $FILE -DgroupId=com.github.abanoub92 -DartifactId=jVersionChecker -Dversion=1.8.7 -Dpackaging=aar -DgeneratePom=true
+  - mvn install:install-file $FILE -DgroupId=com.github.abanoub92 -DartifactId=jVersionChecker -Dversion=1.8.9 -Dpackaging=aar -DgeneratePom=true

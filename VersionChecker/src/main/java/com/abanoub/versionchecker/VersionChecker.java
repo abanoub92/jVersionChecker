@@ -42,8 +42,7 @@ public class VersionChecker {
     }
 
     @SuppressLint("CheckResult")
-    public boolean check(){
-        AtomicBoolean updateAvailable = new AtomicBoolean(false);
+    public void check(UpdateAvailableCallback callback){
         AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(activity);
         appUpdateManager.getAppUpdateInfo().addOnSuccessListener(task -> {
             int s = task.availableVersionCode();
@@ -52,14 +51,14 @@ public class VersionChecker {
                 return;
 
             if (s > currentVersion) {
-                updateAvailable.set(true);
+                callback.onUpdateAvailableListener(true);
                 if (!activity.isFinishing()) //to avoid crashing when activity is not visible
                     showUpdate().create().show();
             }
+            else
+                callback.onUpdateAvailableListener(false);
 
         });
-
-        return updateAvailable.get();
     }
 
     private AlertDialog.Builder showUpdate(){
