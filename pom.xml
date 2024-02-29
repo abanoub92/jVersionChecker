@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.abanoub92</groupId>
     <artifactId>jVersionChecker</artifactId>
-    <version>1.8.9</version>
+    <version>1.9.0</version>
     <packaging>pom</packaging>
-    <description>Add update available callback</description>
+    <description>Add failure callback</description>
     <dependencies>
         <dependency>
             <groupId>com.google.android.play</groupId>

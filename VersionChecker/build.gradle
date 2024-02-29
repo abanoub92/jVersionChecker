@@ -55,9 +55,9 @@ publishing{
         maven(MavenPublication){
             groupId='com.github.abanoub92'
             artifactId = 'jVersionChecker'
-            version = '1.8.9'
+            version = '1.9.0'
             pom {
-                description = 'Add update available callback'
+                description = 'Add failure callback'
             }
         }
     }

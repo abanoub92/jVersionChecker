@@ -12,8 +12,6 @@ import android.net.Uri;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 public class VersionChecker {
 
     @SuppressLint("StaticFieldLeak")
@@ -47,8 +45,10 @@ public class VersionChecker {
         appUpdateManager.getAppUpdateInfo().addOnSuccessListener(task -> {
             int s = task.availableVersionCode();
 
-            if (s == 0)
+            if (s == 0) {
+                callback.onUpdateAvailableListener(false);
                 return;
+            }
 
             if (s > currentVersion) {
                 callback.onUpdateAvailableListener(true);
@@ -58,6 +58,14 @@ public class VersionChecker {
             else
                 callback.onUpdateAvailableListener(false);
 
+        });
+
+        appUpdateManager.getAppUpdateInfo().addOnFailureListener(e -> {
+            callback.onCheckFailureListener();
+        });
+
+        appUpdateManager.getAppUpdateInfo().addOnCanceledListener(() -> {
+            callback.onUpdateAvailableListener(false);
         });
     }
 
