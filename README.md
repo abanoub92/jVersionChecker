@@ -40,9 +40,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       VersionChecker checker = VersionChecker.getInstance(this);
-        checker.check(updateAvailable -> {
-            // your code new version found
+        VersionChecker checker = VersionChecker.getInstance(this);
+        checker.check(new UpdateAvailableCallback() {
+            @Override
+            public void onUpdateAvailableListener(boolean updateAvailable) {
+                // your code if found update
+            }
+    
+            @Override
+            public void onCheckFailureListener() {
+                // your code to handle failure
+            }
         });
     }
 }
