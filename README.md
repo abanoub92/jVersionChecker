@@ -40,8 +40,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        VersionChecker checker = VersionChecker.getInstance(this);
-        checker.check();
+       VersionChecker checker = VersionChecker.getInstance(this);
+        checker.check(updateAvailable -> {
+            // your code new version found
+        });
     }
 }
 ```
